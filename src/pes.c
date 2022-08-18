@@ -143,8 +143,8 @@ int parse_pes_packet(uint8_t *pkt, uint16_t len)
 static int pes_proc(uint16_t pid, uint8_t *pkt, uint16_t len)
 {
 
-	printf("pes pid 0x%x  len %d\n",pid, len);
-	
+	/*printf("pes pid 0x%x  len %d\n",pid, len);*/
+
 	return 0;
 }
 
