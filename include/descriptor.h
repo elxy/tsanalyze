@@ -108,7 +108,7 @@ enum hierarchy_type_e {
 	__m(uint8_t, hierarchy_channel, 6)
 
 #define foreach_registration_member                                                                                    \
-	__m1(uint32_t, format_identifier) \
+	__mintstr(uint32_t, format_identifier) \
 	__m1(uint8_t, additional_identification_info)
 
 /* format_identifier 0x41432D33 as AC-3 */
@@ -340,6 +340,7 @@ struct descriptor_ops {
 
 #define __m(type, name, bits) type name : bits;
 #define __m1(type, name) type name;
+#define __mintstr(type, name) type name;
 #define __mplast(type, name)    uint16_t name##_cnt; type *name;
 #define __mif(type, name, cond, val) type name;
 #define __mrangelv(type, length, name, cond, floor, ceiling) uint8_t length; type* name;
@@ -358,6 +359,7 @@ foreach_enum_descriptor
 #undef __mlv
 #undef __mrangelv
 #undef __mif
+#undef __mintstr
 #undef __mplast
 #undef __m1
 #undef __m
@@ -380,6 +382,7 @@ foreach_enum_descriptor
 
 #define __m(type, name, bits) 
 #define __m1(type, name) 
+#define __mintstr(type, name) 
 #define __mplast(type, name)    if(dr->name) free(dr->name);
 #define __mif(type, name, cond, val)
 #define __mrangelv(type, length, name, cond, floor, ceiling) free(dr->name);
@@ -400,6 +403,7 @@ foreach_enum_descriptor
 #undef __mrangelv
 #undef __mif
 #undef __mplast
+#undef __mintstr
 #undef __m1
 #undef __m
 
@@ -414,6 +418,10 @@ foreach_enum_descriptor
 	}
 
 #define __m1(type, name)                                                                                    \
+	dr->name = TS_READ_##type(buf + bytes_off);                                                                        \
+	bytes_off += sizeof(type);
+
+#define __mintstr(type, name)               \
 	dr->name = TS_READ_##type(buf + bytes_off);                                                                        \
 	bytes_off += sizeof(type);
 
@@ -484,6 +492,7 @@ foreach_enum_descriptor
 #undef __mrangelv
 #undef __mif
 #undef __mplast
+#undef __mintstr
 #undef __m1
 #undef __m
 
@@ -493,6 +502,16 @@ extern struct descriptor_ops des_ops[];
 #define __m(type, name, bits) DUMP_MEMBER(lv, dr, type, name);
 
 #define __m1(type, name) DUMP_MEMBER(lv, dr, type, name);
+
+#define __mintstr(type, name) \
+	{ \
+		uint8_t str[sizeof(type) + 1] = {0}; \
+		unsigned i; \
+		for (i = 0; i < sizeof(type); i++) { \
+			str[i] = (dr->name >> ((sizeof(type) - i - 1) * 8)) & 0xFF; \
+		} \
+		rout(lv+1, "%s : 0x%x (%s)", #name, dr->name, str); \
+	}
 
 #define __mplast(type, name)                                                                                           \
 	size_t tplen = sizeof(type);\
@@ -560,6 +579,7 @@ foreach_enum_descriptor
 #undef __mrangelv
 #undef __mif
 #undef __mplast
+#undef __mintstr
 #undef __m1
 #undef __m
 
