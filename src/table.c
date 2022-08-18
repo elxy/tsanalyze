@@ -71,8 +71,51 @@ static char const *get_stream_type(uint8_t type)
 		"ISO/IEC 14496-1 SL-packetized stream or FlexMux stream carried in PES packets",
 		"ISO/IEC 14496-1 SL-packetized stream or FlexMux stream carried in ISO/IEC14496_sections",
 		"ISO/IEC 13818-6 Synchronized Download Protocol",
+		"Metadata carried in PES packets",
+		"Metadata carried in metadata_sections",
+		"Metadata carried in ISO/IEC 13818-6 Data Carousel",
+		"Metadata carried in ISO/IEC 13818-6 Object Carousel",
+		"Metadata carried in ISO/IEC 13818-6 Synchronized Download Protocol",
+		"IPMP stream (defined in ISO/IEC 13818-11, MPEG-2 IPMP)",
+		"AVC video stream conforming to one or more profiles defined in Annex A of Rec. ITU-T H.264 | ISO/IEC 14496-10 "
+		"or AVC video sub-bitstream of SVC as defined in 2.1.10 or MVC base view sub-bitstream, as defined in 2.1.83, "
+		"or AVC video sub-bitstream of MVC, as defined in 2.1.8 or MVCD base view sub-bitstream, as defined in 2.1.88, "
+		"or AVC video sub-bitstream of MVCD, as defined in 2.1.9, or AVC base layer of an HEVC video stream conforming "
+		"to one or more profiles defined in Annex G or Annex H of Rec. ITU-T H.265 | ISO/IEC 23008-2",
+		"ISO/IEC 14496-3 Audio, without using any additional transport syntax, such as DST, ALS and SLS",
+		"ISO/IEC 14496-17 Text",
+		"Auxiliary video stream as defined in ISO/IEC 23002-3",
+		"SVC video sub-bitstream of an AVC video stream conforming to one or more profiles defined in Annex G of Rec. "
+		"ITU-T H.264 | ISO/IEC 14496-10",
+		"MVC video sub-bitstream of an AVC video stream conforming to one or more profiles defined in Annex H of Rec. "
+		"ITU-T H.264 | ISO/IEC 14496-10",
+		"Video stream conforming to one or more profiles as defined in Rec. ITU-T T.800 | ISO/IEC 15444-1",
+		"Additional view Rec. ITU-T H.262 | ISO/IEC 13818-2 video stream for service-compatible stereoscopic 3D "
+		"services (see Notes 3 and 4)",
+		"Additional view Rec. ITU-T H.264 | ISO/IEC 14496-10 video stream conforming to one or more profiles defined "
+		"in Annex A for service-compatible stereoscopic 3D services (see Notes 3 and 4)",
+		"Rec. ITU-T H.265 | ISO/IEC 23008-2 video stream or an HEVC temporal video sub-bitstream",
+		"HEVC temporal video subset of an HEVC video stream conforming to one or more profiles defined in Annex A of "
+		"Rec. ITU-T H.265 | ISO/IEC 23008-2",
+		"MVCD video sub-bitstream of an AVC video stream conforming to one or more profiles defined in Annex I of Rec. "
+		"ITU-T H.264 | ISO/IEC 14496-10",
+		"Timeline and External Media Information Stream (see Annex T)",
+		"HEVC enhancement sub-partition which includes TemporalId 0 of an HEVC video stream where all NALs units "
+		"contained in the stream conform to one or more profiles defined in Annex G of Rec. ITU-T H.265 | ISO/IEC "
+		"23008-2",
+		"HEVC temporal enhancement sub-partition of an HEVC video stream where all NAL units contained in the stream "
+		"conform to one or more profiles defined in Annex G of Rec. ITU-T H.265 | ISO/IEC 23008-2",
+		"HEVC enhancement sub-partition which includes TemporalId 0 of an HEVC video stream where all NAL units "
+		"contained in the stream conform to one or more profiles defined in Annex H of Rec. ITU-T H.265 | ISO/IEC "
+		"23008-2",
+		"HEVC temporal enhancement sub-partition of an HEVC video stream where all NAL units contained in the stream "
+		"conform to one or more profiles defined in Annex H of Rec. ITU-T H.265 | ISO/IEC 23008-2",
+		"Green access units carried in MPEG-2 sections",
+		"ISO/IEC 23008-3 Audio with MHAS transport syntax – main stream",
+		"ISO/IEC 23008-3 Audio with MHAS transport syntax – auxiliary stream",
+		"Quality access units carried in sections",
 	};
-	if (type < 0x15) {
+	if (type < 0x30) {
 		return stream_type[type];
 	} else if (type < 0x80)
 		return "ISO/IEC 13818-1 reserved";
