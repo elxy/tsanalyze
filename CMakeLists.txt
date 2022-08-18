@@ -7,6 +7,7 @@ AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/src SRC_LIST)
 SET(CMAKE_C_COMPILER "/usr/bin/gcc")
 message(${CMAKE_SYSTEM_NAME})
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS "YES")
 
 SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 -W -Wall -Wfatal-errors -Wstrict-prototypes -Wshadow -Wno-unused-parameter")
 IF(${CMAKE_BUILD_TYPE} MATCHES "debug")
